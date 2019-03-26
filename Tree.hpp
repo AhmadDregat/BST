@@ -18,18 +18,18 @@ namespace ariel {
     private:
         void  makeemptytree(Node *leaf);
         bool  Find(Node *r, int x);
-        void insertHelper(Node *root,int value);
-        int sizehelp (Node *root);
+        void insertHelper(Node *myroot,int value);
+        int sizehelp (Node *myroot);
         int  right (Node *r,int i);
         int left (Node *r,int i);
-        Node* parent(Node *root, int i);
+        Node* parent(Node *myroot, int i);
         void display(Node* t);
 
 
 
     public:
 
-        Node *root;
+        Node *myroot;
 
         Tree();
         void insert(int i);
@@ -45,5 +45,8 @@ namespace ariel {
 
     };
 }
+
+
+
 
 
