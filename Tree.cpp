@@ -3,12 +3,11 @@
 #include <iostream>
 #include "Tree.hpp"
 using namespace std ;
-using namespace ariel ;
-using namespace Tree ;
+
 struct Node {
     Node::Node(int val) // Counstructor with value
     {
-        root = NULL;
+        myroot = NULL;
         left = NULL;
         right = NULL;
         value = val;
@@ -16,7 +15,7 @@ struct Node {
 
     Node::Node() // Empty counstructor
     {
-        root = NULL;
+        myroot = NULL;
         left = NULL;
         right = NULL;
     }
@@ -38,8 +37,8 @@ struct Node {
 
        void ariel::Tree:: makeemptytree(Node *leaf){
         if (leaf != NULL) {
-            dreg:: emptytree(leaf->left);
-            dreg:: emptytree(leaf->right);
+            emptytree(leaf->left);
+             emptytree(leaf->right);
             delete leaf;
         }
         return NULL;
@@ -58,9 +57,9 @@ struct Node {
             return false ;
         }
         else if (x>r->data){
-            return contains(r->left,x);
+            return Find(r->left,x);
         }else if(x<r->data){
-            return contains(r->right,x);
+            return Find(r->right,x);
         }
         return r;
     }
@@ -80,10 +79,10 @@ struct Node {
             throw invalid_argument("This number is available in the tree");
         }
         else if (myroot->data > value ){
-            myroot->left=  insert(myroot->left,value);
+            myroot->left=  insertHelper(myroot->left,value);
         }
         if (value >myroot->data){
-            myroot->right=  insert(myroot->right,value);
+            myroot->right=  insertHelper(myroot->right,value);
         }
 
     }
@@ -170,7 +169,7 @@ struct Node {
 
         int ariel::Tree::root(){
             if (myroot == NULL)
-                throw "No root node";
+                throw::invalid_argument( "No root node");
             return myroot->value;
         }
 
@@ -192,14 +191,14 @@ struct Node {
          /*
            * inorder
            * */
-         void ariel::Tree:: display(Node* t){
+         void ariel::Tree:: display(Node *t){
           if (t == NULL)
             return;
              display(t->left);
              cout << t->data << " ";
-             dreg::display(t->right);
+            display(t->right);
         }
-    Node* ariel::Tree::parent(Node *myroot, int i) {
+    Node* ariel::Tree::parenthelp(Node *myroot, int i) {
         if (myroot->data == i) {
             if (myroot->left == NULL) {
                 return NULL;
@@ -208,19 +207,19 @@ struct Node {
 
                 return  myroot;
             }
-            if (dreg::parent(myroot->left, i) != NULL) {
-                return dreg::parent(myroot->left, i);
+            if (parenthelp(myroot->left, i) != NULL) {
+                return parenthelp(myroot->left, i);
             }
 
-            else if (dreg::parent(myroot->right, i) != NULL) {
+            else if (parenthelp(myroot->right, i) != NULL) {
 
-                return 	dreg::parent(myroot->right, i);
+                return 	parenthelp(myroot->right, i);
 
             }
         }
     }
         int ariel::Tree::right (int i ){
-            return right (Node *r,i)
+            return right (myroot,i)
         }
     int ariel::Tree:: right (Node *r,int i){
         if (r->data==i){
@@ -258,6 +257,5 @@ struct Node {
 
 
     };
-
 
 
