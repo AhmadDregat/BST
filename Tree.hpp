@@ -9,6 +9,7 @@ struct Node
     Node *right;
 };
 
+
 namespace ariel {
     class Tree {
     private:
