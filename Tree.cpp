@@ -2,8 +2,7 @@
 #include <iostream>
 #include "Tree.hpp"
 using namespace std ;
-using namespace ariel ;
-using namespace Tree ;
+
 struct Node {
     Node::Node(int val) // Counstructor with value
     {
