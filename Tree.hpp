@@ -1,7 +1,6 @@
 #include<iostream>
 using namespace std;
-using namespace ariel ;
-using namespace Tree ;
+
 
 struct Node
 {
@@ -18,7 +17,7 @@ namespace ariel {
     class Tree {
     private:
         void  makeemptytree(Node *leaf);
-        bool  Find(node *r, int x);
+        bool  Find(Node *r, int x);
         void insertHelper(Node *root,int value);
         int sizehelp (Node *root);
         int  right (Node *r,int i);
