@@ -4,7 +4,7 @@ using namespace std;
 
 struct Node
 {
-    int value;
+    int data;
     Node *root;
     Node *left;
     Node *right;
@@ -45,6 +45,11 @@ namespace ariel {
 
     };
 }
+
+
+
+
+
 
 
 
