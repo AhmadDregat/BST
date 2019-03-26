@@ -1,8 +1,10 @@
 
+
 #include <iostream>
 #include "Tree.hpp"
 using namespace std ;
-
+using namespace ariel ;
+using namespace Tree ;
 struct Node {
     Node::Node(int val) // Counstructor with value
     {
@@ -24,14 +26,14 @@ struct Node {
         // Constructors
         ariel::Tree::Tree()
         {
-           Tree::this->root=NULL;
+           Tree::this->myroot=NULL;
 
         }
         /*
          *distractor
          */
         ariel::Tree:: ~Tree(){
-            makeemptytree(root);
+            makeemptytree(myroot);
         }
 
        void ariel::Tree:: makeemptytree(Node *leaf){
@@ -43,7 +45,7 @@ struct Node {
         return NULL;
     }
     bool ariel::Tree::contains(int i ){
-        Node* t = Find(root, i);
+        Node* t = Find(myroot, i);
         if(t==NULL)return false;
         else
             return true ;
@@ -73,15 +75,15 @@ struct Node {
                 this->insertHelper(root,data);
             }
         }
-        void ariel::Tree::insertHelper(Node *root,int value){
-        if (root->data==value){
+        void ariel::Tree::insertHelper(Node *myroot,int value){
+        if (myroot->data==value){
             throw invalid_argument("This number is available in the tree");
         }
-        else if (root->data > value ){
-            root->left=  insert(root->left,value);
+        else if (myroot->data > value ){
+            myroot->left=  insert(myroot->left,value);
         }
-        if (value >root->root){
-            root->right=  insert(root->right,value);
+        if (value >myroot->data){
+            myroot->right=  insert(myroot->right,value);
         }
 
     }
@@ -89,8 +91,8 @@ struct Node {
          * remove (int i) : remove a node the tree with value n. Its O(lgn)
          */
         bool ariel::Tree:: remove(int i ){
-            Node* parent = root;
-            Node* current = root;
+            Node* parent = myroot;
+            Node* current = myroot;
             bool isLeftChild = false;
             while(current->data!=id){
                 parent = current;
@@ -108,8 +110,8 @@ struct Node {
             //if i am here that means we have found the node
             //Case 1: if node to be deleted has no children
             if(current->left==NULL&& current->right==NULL){
-                if(current==root){
-                    root = NULL;
+                if(current==myroot){
+                    myroot = NULL;
                 }
                 if (!isLeftChild) {
                     parent->right = NULL;
@@ -119,8 +121,8 @@ struct Node {
             }
                 //Case 2 : if node to be deleted has only one child
             else if(current->right==NULL){
-                if(current==root){
-                    root = current->left;
+                if(current==myroot){
+                    myroot = current->left;
                 }else if(isLeftChild){
                     parent->left = current->left;
                 }else{
@@ -128,8 +130,8 @@ struct Node {
                 }
             }
             else if(current->left==NULL){
-                if(current==root){
-                    root = current->right;
+                if(current==myroot){
+                    myroot = current->right;
                 }else if(isLeftChild){
                     parent->left = current->right;
                 }else{
@@ -139,8 +141,8 @@ struct Node {
 
                 //now we have found the minimum element in the right sub tree
                 Node* successor	 = getSuccessor(current);
-                if(current==root){
-                    root = successor;
+                if(current==myroot){
+                    myroot = successor;
                 }else if(isLeftChild){
                     parent->left = successor;
                 }else{
@@ -152,28 +154,28 @@ struct Node {
         }
 
         int  ariel::Tree:: size (){
-            return sizehelp(this->root);
+            return sizehelp(this->myroot);
 
         }
-        int ariel::Tree::sizehelp(Node *root){
-            if (root==NULL){
+        int ariel::Tree::sizehelp(Node *myroot){
+            if (myroot==NULL){
                 size=0;
                 return size;
             }
-            else return 1+sizehelp(root->left)+sizehelp(root->right);
+            else return 1+sizehelp(myroot->left)+sizehelp(myroot->right);
 
         }
 
 
 
         int ariel::Tree::root(){
-            if (root == NULL)
+            if (myroot == NULL)
                 throw "No root node";
-            return root->value;
+            return myroot->value;
         }
 
         int ariel::Tree:: parent (int i ){
-            Node* temp =parent(root,i);
+            Node* temp =parent(myroot,i);
             if (temp==NULL) {
                 throw::invalid_argument("No Parent found");
 
@@ -183,7 +185,7 @@ struct Node {
 
         }
         void ariel::Tree::print() const  {
-            display(root);
+            display(myroot);
             cout << endl;
 }
 
@@ -197,22 +199,22 @@ struct Node {
              cout << t->data << " ";
              dreg::display(t->right);
         }
-    Node* ariel::Tree::parent(Node *root, int i) {
-        if (root->data == i) {
-            if (root->left == NULL) {
+    Node* ariel::Tree::parent(Node *myroot, int i) {
+        if (myroot->data == i) {
+            if (myroot->left == NULL) {
                 return NULL;
             }
-            else if ((root->left != NULL && root->left->data == i) || (root->right != NULL && root->right->data == i)) {
+            else if ((v->left != NULL && myroot->left->data == i) || (myroot->right != NULL && myroot->right->data == i)) {
 
-                return  root;
+                return  myroot;
             }
-            if (dreg::parent(root->left, i) != NULL) {
-                return dreg::parent(root->left, i);
+            if (dreg::parent(myroot->left, i) != NULL) {
+                return dreg::parent(myroot->left, i);
             }
 
-            else if (dreg::parent(root->right, i) != NULL) {
+            else if (dreg::parent(myroot->right, i) != NULL) {
 
-                return 	dreg::parent(root->right, i);
+                return 	dreg::parent(myroot->right, i);
 
             }
         }
@@ -222,7 +224,7 @@ struct Node {
         }
     int ariel::Tree:: right (Node *r,int i){
         if (r->data==i){
-            if (root->right==NULL){
+            if (myroot->right==NULL){
                 cout << "No right Child for"<< i << endl;
                 return -1;
             }else return  r->right->data;
@@ -236,12 +238,12 @@ struct Node {
     }
         int ariel::Tree:: left(int i){
 
-            return left (root,i)
+            return left (myroot,i)
         }
 
         int ariel::Tree:: left (Node *r ,int i ){
             if (r->data==i){
-                if (root->left==null){
+                if (myroot->left==null){
                     cout << "No Left Child for"<< x << endl;
                     return -1;
                 }else return  r->left->data;
@@ -256,5 +258,6 @@ struct Node {
 
 
     };
+
 
 
