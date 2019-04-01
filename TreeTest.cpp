@@ -84,8 +84,8 @@ int main()
       .CHECK_OK(fbtree1.print())
       .CHECK_OK(fbtree1.insert(666))
       .CHECK_OK(fbtree1.print())
-      .CHECK_OK(fbtree1.remove(444))
-      .CHECK_OK(fbtree1.print())
+      .CHECK_OK(fbtree1.remove(444))//////////////
+      .CHECK_OK(fbtree1.print())///////////////////////
       .CHECK_OK(fbtree1.remove(110))
       .CHECK_OK(fbtree1.print())
 
@@ -112,21 +112,21 @@ int main()
 
       .CHECK_OK(fbtree2.print())
       .CHECK_OK(fbtree2.remove(500))
-      .CHECK_EQUAL(fbtree2.root(), 600)
+      .CHECK_EQUAL(fbtree2.root(), 600)///////////////
       .CHECK_OK(fbtree2.print())
       .CHECK_THROWS(fbtree2.right(600))
-      .CHECK_EQUAL(fbtree2.parent(400), 600)
+      .CHECK_EQUAL(fbtree2.parent(400), 600)////////////
       .CHECK_OK(fbtree2.insert(700))
       .CHECK_OK(fbtree2.insert(650))
       .CHECK_OK(fbtree2.insert(800))
       .CHECK_OK(fbtree2.print())
-      .CHECK_EQUAL(fbtree2.root(), 600)
+      .CHECK_EQUAL(fbtree2.root(), 600)///////////
 
-      .CHECK_OK(fbtree2.remove(600))
+      .CHECK_OK(fbtree2.remove(600))//////////////
       .CHECK_OK(fbtree2.print())
-      .CHECK_THROWS(fbtree2.parent(650))
-      .CHECK_EQUAL(fbtree2.parent(700), 650)
-      .CHECK_EQUAL(fbtree2.root(), 650)
+      .CHECK_THROWS(fbtree2.parent(650))///////
+      .CHECK_EQUAL(fbtree2.parent(700), 650)/////////
+      .CHECK_EQUAL(fbtree2.root(), 650)//////////
 
 
       // Print result
