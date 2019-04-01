@@ -22,7 +22,7 @@ void ariel::Tree::DestroyTree(Node *curr) // Destroy all subtrees of current nod
 
 ariel::Tree::~Tree() // Deconstructor for tree
 {
-    DestroyTree(rootNode);
+    DestroyTree(myroot);
 }
 //////////////////////////
 
