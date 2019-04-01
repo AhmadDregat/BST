@@ -8,7 +8,7 @@ ariel::Tree::Tree()
 {
     Tree::myroot=NULL;
 }
-//////////////////////////
+
 
 /////////////////////////
 void ariel::Tree::DestroyTree(Node *curr) // Destroy all subtrees of current node
