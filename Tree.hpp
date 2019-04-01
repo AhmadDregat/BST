@@ -17,9 +17,10 @@ namespace ariel {
         Node*  Find(Node *r, int x);
         void insertHelper(Node *myroot,int value);
         void display(Node *root, int space)const;
-        Node* remove(Node* r, int data) ;
+    Node* remove(Node* myroot, int data) ;
         int helpsize=0;
-        
+        Node* findMin(Node* t);
+
         
         
     public:
