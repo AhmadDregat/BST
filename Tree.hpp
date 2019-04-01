@@ -16,7 +16,7 @@ namespace ariel {
         void makeemptytree(Node *leaf);
         Node*  Find(Node *r, int x);
         void insertHelper(Node *myroot,int value);
-        void display(Node *root, int space);
+        void display(Node *root, int space)const;
         Node* remove(Node* r, int data) ;
         int helpsize=0;
         
@@ -34,7 +34,7 @@ namespace ariel {
         int parent(int i);
         int left(int i);
         int right(int i);
-        void print();
+        void print()const;
         bool contains(int i);
         ~Tree() ;
         
