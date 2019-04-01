@@ -13,7 +13,7 @@ struct Node
 namespace ariel {
     class Tree {
     private:
-void DestroyTree(Node *curr) ;
+void DestroyTree(Node *curr); // Destroy all subtrees of current node
         Node*  Find(Node *r, int x);
         void insertHelper(Node *myroot,int value);
         void display(Node *root, int space)const;
@@ -33,8 +33,8 @@ void DestroyTree(Node *curr) ;
         int size();
         int root();
         int parent(int i);
-        int left(int i);
-        int right(int i);
+        int left(int num);
+        int right(int num);
         void print()const;
         bool contains(int i);
         ~Tree() ;
