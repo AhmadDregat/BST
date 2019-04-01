@@ -1,18 +1,22 @@
 #include <iostream>
 #include "Tree.hpp"
 using namespace std ;
+//////////////////////////
 
 // Constructors
 ariel::Tree::Tree()
 {
     Tree::myroot=NULL;
 }
+//////////////////////////
+
 /*
  *distractor
  */
 ariel::Tree:: ~Tree(){
     makeemptytree(myroot);
 }
+//////////////////////////
 
 void ariel::Tree:: makeemptytree(Node *leaf){
     if (leaf != NULL) {
@@ -21,6 +25,8 @@ void ariel::Tree:: makeemptytree(Node *leaf){
         delete leaf;
     }
 }
+//////////////////////////
+
 /*
  * contains(int i) : Find a node the tree with value i. Its O(lgn)
  */
@@ -35,12 +41,15 @@ Node* ariel::Tree::Find(Node *r,int x){
     }
     else return NULL;
 }
+//////////////////////////
+
 bool ariel::Tree::contains(int i ){
     if(Find(myroot, i)==NULL)
         return false;
     else
         return true ;
 }
+//////////////////////////
 
 /*
  * Insert(int data) : Add a node the tree with value data Its O(lgn)
@@ -60,6 +69,8 @@ void ariel::Tree:: insert(int data){
         helpsize++;
     }
 }
+//////////////////////////
+
 void ariel::Tree::insertHelper(Node *r,int value){
 
     if (r->data > value ) {
@@ -88,6 +99,7 @@ void ariel::Tree::insertHelper(Node *r,int value){
 }
 
 
+//////////////////////////
 
 /*
  * remove (int i) : remove a node the tree with value n. Its O(lgn)
@@ -105,12 +117,14 @@ void ariel::Tree:: remove(int x)
             helpsize--;
         }
     }
+//////////////////////////
 
     int  ariel::Tree::size(){
         return helpsize;
     }
 
-    
+    //////////////////////////
+
     
     
     int ariel::Tree::root(){
@@ -120,11 +134,12 @@ void ariel::Tree:: remove(int x)
     }
     
     
-    
+    ///////////////////////////////////
     /*
      * inorder
      * */
-void ariel::Tree::display(Node *root, int space)const{
+void ariel::Tree::display(Node *root, int space)const
+{
     // Base case
     if (root == NULL)
         return;
@@ -145,71 +160,71 @@ void ariel::Tree::display(Node *root, int space)const{
     // Process left child
     ariel::Tree::display(root->left, space);
 }
+//////////////////////////
 
 
-    Node* ariel::Tree::remove(Node* root, int k) {
-        
-        // Base case
-        if (root == NULL)
-            return root;
-        
-        // Recursive calls for ancestors of
-        // node to be deleted
-        if (root->data > k) {
-            root->left = remove(root->left, k);
-            return root;
-        }
-        else if (root->data < k) {
-            root->right = remove(root->right, k);
-            return root;
-        }
-        
-        // We reach here when root is the node
-        // to be deleted.
-        
-        // If one of the children is empty
-        if (root!=NULL&&root->left == NULL) {
-            Node* temp = root->right;
-            root=NULL;
-            delete root;
+    Node* ariel::Tree::remove(Node* myroot, int data) {
+	if (myroot == NULL)
+        return myroot;
+
+    if (data < myroot->data){
+
+		Node* temp=ariel::Tree::remove(myroot->left, data);
+        myroot->left =temp;
+		}
+   
+    else if (data > myroot->data)
+		{
+
+			Node* temp=ariel::Tree::remove(myroot->right, data);
+        myroot->right=temp;
+}else
+    {
+      
+        if (myroot->left == NULL)
+        {
+            Node *temp = myroot->right;
+            delete myroot;
             return temp;
         }
-        else if (root!=NULL&&root->right == NULL) {
-            Node* temp = root->left;
-            delete root;
+        else if (myroot->right== NULL)
+        {
+            Node *temp = myroot->left;
+            
+            delete myroot;
             return temp;
         }
-        
-        // If both children exist
-        else {
-            
-            Node* succParent = root->right;
-            
-            // Find successor
-            Node *succ = root->right;
-            while (succ->left != NULL) {
-                succParent = succ;
-                succ = succ->left;
-            }
-            
-            // Delete successor.  Since successor
-            // is always left child of its parent
-            // we can safely make successor's right
-            // right child as left of its parent.
-            succParent->left = succ->right;
-            
-            // Copy Successor Data to root
-            root->data = succ->data;
-            
-            // Delete Successor and return root
-            delete succ;
-            return root;
-        }
+        //////////////////////////
+
+        Node *temp = ariel::Tree::findMin(myroot->right);
+
+      
+        myroot->data=(temp->data);
+
+        // Delete the inorder successor
+        myroot->right=(ariel::Tree::remove(myroot->right, temp->data));
     }
+    return myroot;
+}
+
+//////////////////////////
+
+    Node* ariel::Tree::findMin(Node* t)
+    {
+	if(t == NULL)
+		return NULL;
+	else if(t->left == NULL)
+		return t;
+	else
+		return ariel::Tree::findMin(t->left);
+    }
+         //////////////////////////
+
             void ariel::Tree::print() const{
                 ariel::Tree::display(myroot,0);
             }
-         
+         //////////////////////////
+
             int ariel::Tree::parent(int num) //return value of the parent of num
             {
                    Node *temp = Find(myroot,num);
@@ -236,6 +251,7 @@ void ariel::Tree::display(Node *root, int space)const{
                 else
                     throw "error!";
             }*/
+//////////////////////////
 
             int ariel::Tree::right (int i ){
                 Node *t=Find(myroot, i);
@@ -244,6 +260,7 @@ void ariel::Tree::display(Node *root, int space)const{
                 else
                     return t->right->data;
             }
+//////////////////////////
 
             int ariel::Tree::left(int i){
                 Node *t=Find(myroot, i);
