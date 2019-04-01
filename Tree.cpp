@@ -10,19 +10,20 @@ ariel::Tree::Tree()
 }
 //////////////////////////
 
-void ariel::Tree::DestroyTree(Node *curr) // Destroy all subtrees of current node
-{
-    if (curr)
-    {
-        DestroyTree(curr->left);
-        DestroyTree(curr->right);
-        delete curr;
-    }
+/*
+ *distractor
+ */
+ariel::Tree:: ~Tree(){
+    makeemptytree(myroot);
 }
+//////////////////////////
 
-ariel::Tree::~Tree() // Deconstructor for tree
-{
-    DestroyTree(myroot);
+void ariel::Tree:: makeemptytree(Node *leaf){
+    if (leaf != NULL) {
+        makeemptytree(leaf->right);
+        makeemptytree(leaf->left);
+        delete leaf;
+    }
 }
 //////////////////////////
 
@@ -128,7 +129,7 @@ void ariel::Tree:: remove(int x)
     
     int ariel::Tree::root(){
         if (myroot == NULL)
-            throw::invalid_argument( "No root node");
+            throw "No root node";
         return myroot->data;
     }
     
@@ -193,7 +194,6 @@ void ariel::Tree::display(Node *root, int space)const
             delete myroot;
             return temp;
         }
-        //////////////////////////
 
         Node *temp = ariel::Tree::findMin(myroot->right);
 
@@ -219,9 +219,17 @@ void ariel::Tree::display(Node *root, int space)const
     }
          //////////////////////////
 
-            void ariel::Tree::print() const{
-                ariel::Tree::display(myroot,0);
+           
+            void ariel::Tree::print() const //print the tree inorder values
+            {
+               cout << endl;
+               if (myroot == NULL)
+               cout << "Tree is empty";
+                else
+                display(myroot,10);
+                 cout << endl;
             }
+
          //////////////////////////
 
             int ariel::Tree::parent(int num) //return value of the parent of num
@@ -238,33 +246,35 @@ void ariel::Tree::display(Node *root, int space)const
                    return temp->root->data;
                 }
 
-         /*   int ariel::Tree:: parent (int i ){
-                Node *temp =Find(myroot,i);
-                if(temp!=NULL){
-                    if (temp->root==NULL) {
-                        throw::invalid_argument("No Parent found");
-                    }
-                    else
-                        return temp->root->data;
-                }
-                else
-                    throw "error!";
-            }*/
 //////////////////////////
 
-            int ariel::Tree::right (int i ){
-                Node *t=Find(myroot, i);
-                if(t->right==NULL)
-                    throw "error!";
-                else
-                    return t->right->data;
-            }
+         
+            int ariel::Tree::right(int num) //return value of the left child
+{
+    Node *temp = Find(myroot, num);
+    if (temp == NULL)
+    {
+        throw "The number isn't in the tree";
+    }
+    if (temp->right == NULL)
+    {
+        throw "No right child";
+    }
+    return temp->right->data;
+}
 //////////////////////////
 
-            int ariel::Tree::left(int i){
-                Node *t=Find(myroot, i);
-                if(t==NULL||t->left==NULL)
-                    throw "error!";
-                else
-                    return t->left->data;
-            }
+          
+            int ariel::Tree::left(int num) //return value of the left child
+{
+    Node *temp = Find(myroot, num);
+    if (temp == NULL)
+    {
+        throw "The number isn't in the tree";
+    }
+    if (temp->left == NULL)
+    {
+        throw "No left child";
+    }
+    return temp->left->data;
+}
