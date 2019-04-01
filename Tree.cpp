@@ -9,6 +9,8 @@ ariel::Tree::Tree()
     Tree::myroot=NULL;
 }
 //////////////////////////
+
+/////////////////////////
 void ariel::Tree::DestroyTree(Node *curr) // Destroy all subtrees of current node
 {
     if (curr)
@@ -246,8 +248,7 @@ void ariel::Tree::display(Node *root, int space)const
 
 //////////////////////////
 
-         
-            int ariel::Tree::right(int num) //return value of the left child
+int ariel::Tree::right(int num) //return value of the left child
 {
     Node *temp = Find(myroot, num);
     if (temp == NULL)
@@ -263,7 +264,7 @@ void ariel::Tree::display(Node *root, int space)const
 //////////////////////////
 
           
-            int ariel::Tree::left(int num) //return value of the left child
+ int ariel::Tree::left(int num) //return value of the left child
 {
     Node *temp = Find(myroot, num);
     if (temp == NULL)
