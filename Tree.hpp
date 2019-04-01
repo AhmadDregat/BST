@@ -17,9 +17,9 @@ void DestroyTree(Node *curr); // Destroy all subtrees of current node
         Node*  Find(Node *r, int x);
         void insertHelper(Node *myroot,int value);
         void display(Node *root, int space)const;
-    Node* remove(Node* myroot, int data) ;
         int helpsize=0;
-        Node* findMin(Node* t);
+    Node *FindNextNode(Node *curr) ;// Find the next number after num using current node
+
 
         
         
@@ -29,7 +29,7 @@ void DestroyTree(Node *curr); // Destroy all subtrees of current node
         
         Tree();
         void insert(int i);
-        void  remove(int i);
+        bool remove(int num);
         int size();
         int root();
         int parent(int i);
