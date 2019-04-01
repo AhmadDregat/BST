@@ -104,19 +104,7 @@ void ariel::Tree::insertHelper(Node *r,int value){
 /*
  * remove (int i) : remove a node the tree with value n. Its O(lgn)
  */
-void ariel::Tree:: remove(int x)
-    {
-        if(!contains(x))
-            throw "error!";
-        if(myroot!=NULL){
-            if(myroot->data==x){
-                myroot=NULL;
-                delete myroot;
-            }
-            ariel::Tree::remove(myroot,x);
-            helpsize--;
-        }
-    }
+
 //////////////////////////
 
     int  ariel::Tree::size(){
@@ -163,63 +151,84 @@ void ariel::Tree::display(Node *root, int space)const
 //////////////////////////
 
 
-    Node* ariel::Tree::remove(Node* myroot, int data) {
-	if (myroot == NULL)
-        return myroot;
-
-    if (data < myroot->data){
-
-		Node* temp=ariel::Tree::remove(myroot->left, data);
-        myroot->left =temp;
-		}
-   
-    else if (data > myroot->data)
-		{
-
-			Node* temp=ariel::Tree::remove(myroot->right, data);
-        myroot->right=temp;
-}else
+  bool ariel::Tree::remove(int num)
+{
+    Node *del = Find(myroot,num);
+    // If the number doesnt exist
+    if (del == NULL)
+        throw "No such number to remove";
+    // Node is a leaf
+    if (del->left == NULL && del->right == NULL)
     {
-      
-        if (myroot->left == NULL)
+        if (del->root != NULL)
         {
-            Node *temp = myroot->right;
-            delete myroot;
-            return temp;
+            if (del->root->right == del)
+                del->root->right = NULL;
+            else
+                del->root->left = NULL;
         }
-        else if (myroot->right== NULL)
+        // Node is root
+        else
         {
-            Node *temp = myroot->left;
-            
-            delete myroot;
-            return temp;
+            myroot = NULL;
         }
-
-        Node *temp = ariel::Tree::findMin(myroot->right);
-
-      
-        myroot->data=(temp->data);
-
-        // Delete the inorder successor
-        myroot->right=(ariel::Tree::remove(myroot->right, temp->data));
+        delete del;
+        helpsize--;
+        return true;
     }
-    return myroot;
+    // Node has one child
+    else if (del->left == NULL || del->right == NULL)
+    {
+        Node *temp = NULL;
+        if (del->left == NULL)
+            temp = del->right;
+        if (del->right == NULL)
+            temp = del->left;
+
+        if (del->root != NULL)
+        {
+            temp->root = del->root;
+            if (del->root->right == del)
+                del->root->right = temp;
+            else
+                del->root->left = temp;
+        }
+        // Node is root
+        else
+        {
+            myroot = temp;
+            temp->root = NULL;
+        }
+
+        delete del;
+        helpsize--;
+        return true;
+    }
+    else if (del->left != NULL && del->right != NULL)
+    {
+        // look for inorder successor
+        Node *next = FindNextNode(del);
+        int temp = next->data;
+        // Use recursive call to delete the next node
+        remove(temp);
+        // Change value
+        del->data = temp;
+        return true;
+    }
+    return false;
 }
 
-//////////////////////////
-
-    Node* ariel::Tree::findMin(Node* t)
-    {
-	if(t == NULL)
-		return NULL;
-	else if(t->left == NULL)
-		return t;
-	else
-		return ariel::Tree::findMin(t->left);
-    }
          //////////////////////////
-
-           
+Node *ariel::Tree::FindNextNode(Node *curr) // Find the next number after num using current node
+{
+    Node *next = curr->right;
+    while (next->left != NULL)
+    {
+        next = next->left;
+    }
+    return next;
+}
+         //////////////////////////  
             void ariel::Tree::print() const //print the tree inorder values
             {
                cout << endl;
