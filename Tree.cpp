@@ -124,7 +124,7 @@ void ariel::Tree:: remove(int x)
     /*
      * inorder
      * */
-void ariel::Tree::display(Node *root, int space)const
+void ariel::Tree::display(Node *root, int space)
 {
     // Base case
     if (root == NULL)
@@ -207,7 +207,7 @@ void ariel::Tree::display(Node *root, int space)const
             return root;
         }
     }
-            void ariel::Tree::print() const{
+            void ariel::Tree::print() {
                 ariel::Tree::display(myroot,0);
             }
          
