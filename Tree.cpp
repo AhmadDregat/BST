@@ -11,19 +11,19 @@ ariel::Tree::Tree()
 
 
 /////////////////////////
-void ariel::Tree::DestroyTree(Node *curr) // Destroy all subtrees of current node
-{
-    if (curr)
-    {
-        DestroyTree(curr->left);
-        DestroyTree(curr->right);
-        delete curr;
+void ariel:: Tree::rmAll(Node* root){
+    if(root==NULL)return;
+    rmAll(root->left);
+    rmAll(root->right);
+    if(root->data==myroot->data){
+        delete myroot->root;
+        myroot->root=NULL;
     }
+    delete root;
+    root=NULL;
 }
-
-ariel::Tree::~Tree() // Deconstructor for tree
-{
-    DestroyTree(myroot);
+ariel::Tree::~Tree(){
+    rmAll(myroot);
 }
 //////////////////////////
 
