@@ -10,20 +10,19 @@ ariel::Tree::Tree()
 }
 //////////////////////////
 
-/*
- *distractor
- */
-ariel::Tree:: ~Tree(){
-    makeemptytree(myroot);
-}
-//////////////////////////
-
-void ariel::Tree:: makeemptytree(Node *leaf){
-    if (leaf != NULL) {
-        makeemptytree(leaf->right);
-        makeemptytree(leaf->left);
-        delete leaf;
+void ariel::Tree::DestroyTree(Node *curr) // Destroy all subtrees of current node
+{
+    if (curr)
+    {
+        DestroyTree(curr->left);
+        DestroyTree(curr->right);
+        delete curr;
     }
+}
+
+ariel::Tree::~Tree() // Deconstructor for tree
+{
+    DestroyTree(rootNode);
 }
 //////////////////////////
 
