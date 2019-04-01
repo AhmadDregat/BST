@@ -13,7 +13,7 @@ struct Node
 namespace ariel {
     class Tree {
     private:
-        void makeemptytree(Node *leaf);
+void DestroyTree(Node *curr) ;
         Node*  Find(Node *r, int x);
         void insertHelper(Node *myroot,int value);
         void display(Node *root, int space)const;
