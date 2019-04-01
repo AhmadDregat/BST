@@ -124,7 +124,7 @@ void ariel::Tree:: remove(int x)
     /*
      * inorder
      * */
-void ariel::Tree::display(Node *root, int space)
+void ariel::Tree::display(Node *root, int space)const
 {
     // Base case
     if (root == NULL)
@@ -207,10 +207,25 @@ void ariel::Tree::display(Node *root, int space)
             return root;
         }
     }
-            void ariel::Tree::print(){
+            void ariel::Tree::print() const{
                 ariel::Tree::display(myroot,0);
             }
-            int ariel::Tree:: parent (int i ){
+         
+            int ariel::Tree::parent(int num) //return value of the parent of num
+            {
+                   Node *temp = Find(myroot,num);
+                 if (temp == NULL)
+                {
+                 throw "The number isn't in the tree";
+                 }
+              if (temp->root == NULL)
+                  {
+                       throw "No parent";
+                 }
+                   return temp->root->data;
+                }
+
+         /*   int ariel::Tree:: parent (int i ){
                 Node *temp =Find(myroot,i);
                 if(temp!=NULL){
                     if (temp->root==NULL) {
@@ -221,7 +236,8 @@ void ariel::Tree::display(Node *root, int space)
                 }
                 else
                     throw "error!";
-            }
+            }*/
+
             int ariel::Tree::right (int i ){
                 Node *t=Find(myroot, i);
                 if(t->right==NULL)
