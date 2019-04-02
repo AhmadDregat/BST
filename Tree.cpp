@@ -6,6 +6,7 @@ using namespace std ;
 // Constructors
 ariel::Tree::Tree()
 {
+    helpsize=0;
     Tree::myroot=NULL;
 }
 
@@ -28,7 +29,7 @@ ariel::Tree::~Tree(){
 //////////////////////////
 
 /*
- * contains(int i) : Find a node the tree with value i. Its O(lgn)
+ * Find(int i) : Find a node the tree with value i. Its O(lgn)
  */
 Node* ariel::Tree::Find(Node *r,int x){
     if(r!=NULL){
@@ -50,10 +51,52 @@ bool ariel::Tree::contains(int i ){
         return true ;
 }
 //////////////////////////
+void ariel::Tree::insertHelp(int key,Node *leaf){
+    if(key< leaf->data){
+        if(leaf->left!=NULL)
+            insertHelp(key, leaf->left);
+        else{
+            leaf->left=new Node;
+            leaf->left->data=key;
+            leaf->left->left=NULL;
+            leaf->left->right=NULL;
+            leaf->left->root=leaf;
+        }
+    }
+    else if(key>=leaf->data){
+        if(leaf->right!=NULL)
+            insertHelp(key, leaf->right);
+        else{
+            leaf->right=new Node;
+            leaf->right->data=key;
+            leaf->right->left=NULL;
+            leaf->right->right=NULL;
+            leaf->right->root=leaf;
+        }
+    }
+    
+}
+void ariel::Tree::insert(int val){
+    
+    if(myroot!=NULL){
+        if(contains(val))
+            throw "the value is exists!";
+        insertHelp(val,myroot);
+        helpsize++;
+    }
+    else{
+        myroot=new Node;
+        myroot->data=val;
+        myroot->left=NULL;
+        myroot->right=NULL;
+        myroot->root=NULL;
+        helpsize++;
+    }
+}
 
-/*
+  /*
  * Insert(int data) : Add a node the tree with value data Its O(lgn)
- */
+ *//*
 void ariel::Tree:: insert(int data){
     if(contains(data))
         throw "error!";
@@ -97,6 +140,7 @@ void ariel::Tree::insertHelper(Node *r,int value){
         }
     }
 }
+*/
 
 
 //////////////////////////
