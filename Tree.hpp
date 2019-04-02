@@ -15,9 +15,11 @@ namespace ariel {
     private:
 void rmAll(Node* root);
         Node*  Find(Node *r, int x);
-        void insertHelper(Node *myroot,int value);
+      //  void insertHelper(Node *myroot,int value);
+        void insertHelp(int key,Node *leaf);
+
         void display(Node *root, int space)const;
-        int helpsize=0;
+        int helpsize;
     Node *FindNextNode(Node *curr) ;// Find the next number after num using current node
 
 
@@ -28,7 +30,7 @@ void rmAll(Node* root);
         Node *myroot;
         
         Tree();
-        void insert(int i);
+        void insert(int val);
         bool remove(int num);
         int size();
         int root();
